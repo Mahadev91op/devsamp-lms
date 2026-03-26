@@ -5,8 +5,17 @@ import Link from "next/link";
 async function getCourses() {
   try {
     await connectDB();
-    const courses = await Course.find({}).sort({ createdAt: -1 }).limit(4);
-    return courses;
+    // FIX 1: .lean() add kiya taaki Mongoose Document ki jagah Plain JSON Object mile
+    const courses = await Course.find({}).sort({ createdAt: -1 }).limit(4).lean();
+    
+    // FIX 2: _id aur dates ko properly string me convert kiya 
+    // taaki Next.js ko JSON parse karne me koi error na aaye
+    return courses.map((course) => ({
+      ...course,
+      _id: course._id.toString(),
+      createdAt: course.createdAt ? course.createdAt.toString() : null,
+      updatedAt: course.updatedAt ? course.updatedAt.toString() : null,
+    }));
   } catch (error) {
     console.error("Courses Fetch Error:", error);
     return [];
@@ -40,10 +49,7 @@ export default async function CoursesSection() {
             </p>
         </div>
 
-        {/* UPDATED LAYOUT LOGIC:
-           1. Mobile: flex + overflow-x-auto (Horizontal Scroll)
-           2. Desktop: grid + grid-cols-4 (Normal Grid)
-        */}
+        {/* Layout Logic */}
         <div className="
             flex md:grid 
             overflow-x-auto md:overflow-visible 
@@ -57,8 +63,6 @@ export default async function CoursesSection() {
             <Link 
               href={`/courses/${course._id}`}
               key={course._id}
-              // UPDATED CARD SIZING:
-              // Added 'block' to ensure Link behaves like a container
               className="
                 block group relative 
                 min-w-[280px] w-[85vw] md:w-auto flex-shrink-0 snap-center 
@@ -73,10 +77,10 @@ export default async function CoursesSection() {
                 
                 <div className="flex justify-between items-start">
                    <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500 bg-white/5 px-2 py-1 rounded-md border border-white/5">
-                     {course.category}
+                     {course.category || "General"}
                    </span>
                    <div className="flex items-center gap-1 bg-yellow-500/10 px-2 py-1 rounded-full border border-yellow-500/20">
-                     <span className="text-yellow-400 text-xs font-bold">★ {course.rating}</span>
+                     <span className="text-yellow-400 text-xs font-bold">★ {course.rating || "5.0"}</span>
                    </div>
                 </div>
 
@@ -92,11 +96,11 @@ export default async function CoursesSection() {
                 <div className="grid grid-cols-2 gap-2 text-xs text-gray-500 border-t border-white/5 pt-4">
                    <div className="flex items-center gap-1.5">
                      <svg className="w-4 h-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                     {course.duration}
+                     {course.duration || "Self-paced"}
                    </div>
                    <div className="flex items-center gap-1.5">
                      <svg className="w-4 h-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
-                     {course.students}+ Students
+                     {course.students || 0}+ Students
                    </div>
                 </div>
 
