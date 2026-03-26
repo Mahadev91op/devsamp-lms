@@ -1,141 +1,169 @@
+"use client";
 import Link from "next/link";
+import { motion } from "framer-motion";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.2 },
+  },
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0, opacity: 1, transition: { type: "spring", stiffness: 100 },
+  },
+};
 
 export default function HeroSection() {
   return (
-    // FIX: 'min-h-screen' और 'pt-20' जोड़ा गया है ताकि कंटेंट Navbar के नीचे से शुरू हो
-    <div className="relative overflow-hidden bg-black min-h-screen flex items-center pt-20">
+    // Added pt-28 for mobile to account for the fixed navbar
+    <section className="relative bg-white pt-28 pb-12 md:pt-36 md:pb-24 overflow-hidden min-h-[100dvh] flex items-center">
       
-      {/* --- BACKGROUND (NO CHANGES) --- */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-gray-800/40 via-[#050505] to-black z-0" />
-      <div 
-        className="absolute inset-0 z-0 opacity-20"
-        style={{
-          backgroundImage: `linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px)`,
-          backgroundSize: '40px 40px'
-        }}
-      ></div>
+      {/* Background Patterns */}
+      <div className="absolute inset-0 z-0 opacity-[0.03]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http/www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23000000\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2v-4h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2v-4h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }}></div>
+      <div className="absolute -top-40 -right-40 w-72 h-72 md:w-96 md:h-96 bg-blue-50 rounded-full blur-[80px] md:blur-[100px] opacity-70 z-0"></div>
+      <div className="absolute -bottom-40 -left-40 w-72 h-72 md:w-96 md:h-96 bg-indigo-50 rounded-full blur-[80px] md:blur-[100px] opacity-70 z-0"></div>
 
-      {/* Blobs */}
-      <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-yellow-500/10 rounded-full blur-3xl pointer-events-none z-0 animate-[pulse_10s_ease-in-out_infinite]" />
-      <div className="absolute bottom-0 -right-1/4 w-1/2 h-1/2 bg-yellow-600/10 rounded-full blur-3xl pointer-events-none z-0 animate-[pulse_12s_ease-in-out_infinite]" />
-      {/* --- BACKGROUND END --- */}
-
-
-      {/* Container */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 w-full relative z-10">
-        
-        <div className="lg:grid lg:grid-cols-12 lg:gap-8 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-center">
           
-          {/* --- LEFT SIDE (TEXT) --- */}
-          <div className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left flex flex-col justify-center">
-            
-            {/* Tagline */}
-            <div className="inline-flex items-center text-xs sm:text-sm font-semibold text-yellow-400 uppercase tracking-widest mb-3 sm:mb-4">
-              <span className="w-6 sm:w-8 h-[2px] bg-yellow-400 mr-2 sm:mr-3 animate-pulse"></span>
-              Premium English Coaching
-            </div>
-            
-            {/* Heading */}
-            <h1 className="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl lg:text-7xl">
-              Unlock Your <span className="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 animate-[pulse_6s_ease-in-out_infinite]">Potential.</span>
-              Master English.
-            </h1>
-            
-            {/* Subtext */}
-            <p className="mt-4 sm:mt-6 text-sm sm:text-base text-gray-300 sm:text-xl lg:text-lg xl:text-xl leading-relaxed font-light">
-              Join <span className="text-yellow-400 font-medium">LearnR</span> today. We blend modern teaching techniques with personalized attention to help you speak and write with absolute confidence.
-            </p>
-            
-            {/* Buttons */}
-            <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row sm:justify-center lg:justify-start space-y-3 sm:space-y-0 sm:space-x-5">
-              <div className="rounded-full shadow-[0_0_20px_rgba(234,179,8,0.3)] hover:shadow-[0_0_30px_rgba(234,179,8,0.6)] transition-all duration-300 w-full sm:w-auto">
-                <Link href="/courses" className="w-full flex items-center justify-center px-8 py-3 sm:py-4 border border-transparent text-base font-bold rounded-full text-black bg-yellow-400 hover:bg-yellow-300 transition-all duration-300 transform hover:-translate-y-1">
-                  Explore Courses
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2 -mr-1" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </Link>
-              </div>
-              <div className="w-full sm:w-auto">
-                {/* Changed href from "/about" to "#about" so it scrolls to the section instead of 404 */}
-                <Link href="#about" className="w-full flex items-center justify-center px-8 py-3 sm:py-4 border-2 border-yellow-400/50 text-base font-bold rounded-full text-yellow-400 bg-transparent hover:bg-yellow-400/10 transition-all duration-300 transform hover:-translate-y-1">
-                  How It Works
-                </Link>
-              </div>
-            </div>
-          </div>
+          {/* Left Column: Text & CTAs */}
+          <motion.div 
+            className="md:col-span-7 space-y-6 md:space-y-8 text-center md:text-left flex flex-col items-center md:items-start"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            {/* Top Badge */}
+            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 rounded-full bg-gray-50 border border-gray-100 shadow-inner">
+                <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
+                </span>
+              <span className="text-[11px] md:text-xs font-bold text-gray-700 tracking-tight">
+                Launch Offer: Enroll in <span className="text-blue-600">Devsamp Academy</span>
+              </span>
+            </motion.div>
 
-          {/* --- RIGHT SIDE (CARD) --- */}
-          <div className="mt-12 lg:mt-0 lg:col-span-6 relative flex items-center justify-center perspective-[2000px] transform scale-90 sm:scale-100 origin-center">
-             <div className="relative w-full max-w-md mx-auto group">
+            {/* Main Headline - Scaled for Mobile */}
+            <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-gray-950 tracking-tighter leading-[1.05] md:leading-[0.95]">
+              Master <span className="text-blue-600">Full Stack</span> Development. Built by Agency Pros.
+            </motion.h1>
 
-                {/* Tera Mera Rings */}
-                <div className="absolute -inset-8 md:-inset-24 border-2 border-dashed border-yellow-500/30 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] animate-[spin_60s_linear_infinite]"></div>
-                <div className="absolute -inset-4 md:-inset-12 border border-dotted border-yellow-500/40 rounded-[40%_60%_70%_30%/50%_60%_30%_60%] animate-[spin_50s_linear_infinite_reverse]"></div>
-                
-                {/* Backdrop Cards */}
-                <div className="absolute top-8 left-8 w-4/5 h-4/5 border border-white/5 bg-gray-900/40 backdrop-blur-xl rounded-3xl transform -rotate-6 z-10 shadow-2xl transition-transform duration-500 group-hover:-rotate-12"></div>
-                <div className="absolute top-4 left-4 w-4/5 h-4/5 border border-yellow-500/20 bg-gray-800/40 backdrop-blur-xl rounded-3xl transform rotate-3 z-20 shadow-[0_0_30px_rgba(234,179,8,0.1)] transition-transform duration-500 group-hover:rotate-6"></div>
-                
-                {/* MAIN CARD */}
-                <div className="relative z-30 bg-black/80 backdrop-blur-2xl border border-yellow-500/40 rounded-3xl p-6 sm:p-8 shadow-[0_30px_60px_rgba(0,0,0,0.5)] overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_30px_60px_rgba(234,179,8,0.25)]">
-                   
-                   <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fbbf24_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
-                   <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-yellow-500/10 to-transparent pointer-events-none"></div>
+            {/* Sub-headline - Scaled for Mobile */}
+            <motion.p variants={itemVariants} className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed">
+              Stop watching endless tutorials. Learn from Mahadev and the <Link href="https://devsamp.com" target="_blank" className="font-bold text-gray-800 hover:text-blue-600 underline decoration-blue-200 decoration-2 underline-offset-2 transition-colors">Devsamp Agency</Link> team using real-world Next.js, MongoDB, and JavaScript projects.
+            </motion.p>
 
-                   <div className="flex flex-col items-center text-center relative z-10">
-                      
-                      {/* Icon Section */}
-                      <div className="relative mb-6 sm:mb-8">
-                         <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-2xl flex items-center justify-center shadow-[0_0_40px_rgba(234,179,8,0.4)] transform rotate-12 group-hover:rotate-0 transition-all duration-500 relative z-10">
-                           <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 sm:h-12 sm:w-12 text-black transform -rotate-12 group-hover:rotate-0 transition-all duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-                           </svg>
-                         </div>
-                         <div className="absolute -top-4 -right-6 p-2 bg-gray-900/80 border border-yellow-500/40 rounded-xl backdrop-blur-md animate-[bounce_3s_infinite]">
-                            <span className="text-yellow-400 font-bold text-base sm:text-lg">A+</span>
-                         </div>
-                         <div className="absolute -bottom-2 -left-6 p-2 bg-gray-900/80 border border-yellow-500/40 rounded-xl backdrop-blur-md animate-[bounce_4s_infinite] animation-delay-1000">
-                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
-                               <path fillRule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.972 7.972 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.415z" clipRule="evenodd" />
-                             </svg>
-                         </div>
-                      </div>
-
-                      <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-wide drop-shadow-sm">Smart Speaking Coach</h3>
-                      <p className="text-gray-300 mt-2 sm:mt-3 font-light text-base sm:text-lg">Real-time pronunciation & grammar feedback.</p>
-
-                      <div className="mt-6 sm:mt-8 w-full bg-black/40 border border-yellow-500/20 rounded-xl p-3 sm:p-4 backdrop-blur-md relative overflow-hidden">
-                          <div className="flex items-center justify-between mb-2 sm:mb-3 text-sm relative z-10">
-                              <span className="text-gray-300 flex items-center font-medium">
-                                <span className="relative flex h-2 w-2 mr-2">
-                                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                                  <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
-                                </span>
-                                Recording...
-                              </span>
-                              <span className="text-yellow-400 font-mono text-[10px] sm:text-xs tracking-wider">AI ANALYZING</span>
-                          </div>
-                          <div className="flex justify-between items-center h-6 sm:h-8 px-2 space-x-1">
-                              <div className="w-1 bg-yellow-500/50 rounded-full animate-[pulse_0.8s_ease-in-out_infinite] h-3"></div>
-                              <div className="w-1 bg-yellow-500/80 rounded-full animate-[pulse_1.0s_ease-in-out_infinite] h-6"></div>
-                              <div className="w-1 bg-yellow-400 rounded-full animate-[pulse_0.6s_ease-in-out_infinite] h-8"></div>
-                              <div className="w-1 bg-yellow-500/80 rounded-full animate-[pulse_1.1s_ease-in-out_infinite] h-5"></div>
-                              <div className="w-1 bg-yellow-500/50 rounded-full animate-[pulse_0.9s_ease-in-out_infinite] h-3"></div>
-                              <div className="w-1 bg-yellow-500/30 rounded-full animate-[pulse_1.2s_ease-in-out_infinite] h-2"></div>
-                          </div>
-                          <div className="mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-white/5 flex justify-between items-center text-[10px] text-gray-400 font-mono uppercase tracking-widest relative z-10">
-                              <span>Accent Score</span>
-                              <span className="text-yellow-400 font-bold text-xs">98% (Excellent)</span>
-                          </div>
-                      </div>
-                   </div>
+            {/* CTAs - Full width on Mobile */}
+            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-3 pt-2 w-full sm:w-auto">
+              <Link href="/courses" className="w-full sm:w-auto">
+                <div className="group relative w-full flex items-center justify-center gap-3 bg-gray-950 text-white font-bold py-3.5 md:py-4 px-8 md:px-10 rounded-2xl hover:bg-gray-800 shadow-lg hover:shadow-blue-100 transition-all cursor-pointer overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
+                    <span className="relative z-10 flex items-center gap-3">
+                        <span>Explore Courses</span>
+                        <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                    </span>
                 </div>
-             </div>
-          </div>
+              </Link>
+              <Link href="/#about" className="w-full sm:w-auto">
+                <div className="group w-full flex items-center justify-center gap-2.5 bg-white text-gray-800 font-semibold py-3.5 md:py-4 px-8 rounded-2xl border border-gray-200 hover:bg-gray-50 hover:border-gray-300 transition-all cursor-pointer">
+                    Why Devsamp?
+                </div>
+              </Link>
+            </motion.div>
 
+            {/* Proof Points / Tech Stack */}
+            <motion.div variants={itemVariants} className="pt-8 md:pt-10 border-t border-gray-100 space-y-4 w-full text-center md:text-left">
+              <p className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest">Industry Standard Stack you'll master</p>
+              <div className="flex items-center justify-center md:justify-start gap-4 md:gap-6 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+                <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg" alt="React" className="h-6 md:h-7 w-auto" title="React.js" />
+                <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nextjs/nextjs-original.svg" alt="Next.js" className="h-6 md:h-7 w-auto" title="Next.js" />
+                <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg" alt="MongoDB" className="h-6 md:h-7 w-auto" title="MongoDB" />
+                <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/tailwindcss/tailwindcss-original.svg" alt="TailwindCSS" className="h-6 md:h-7 w-auto" title="Tailwind CSS" />
+                <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg" alt="NodeJS" className="h-6 md:h-7 w-auto" title="Node.js" />
+              </div>
+            </motion.div>
+
+          </motion.div>
+
+          {/* Right Column: Abstract Agency/Code Visual */}
+          <motion.div 
+            className="md:col-span-5 relative h-[320px] sm:h-[400px] md:h-[550px] mt-8 md:mt-0 origin-center scale-[0.9] sm:scale-100"
+            initial={{ opacity: 0, scale: 0.8, x: 50 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.5, type: "spring" }}
+          >
+            {/* Main Visual Container */}
+            <div className="absolute inset-0 bg-gray-50 border border-gray-100 rounded-[2rem] p-4 md:p-6 shadow-xl shadow-gray-100/50 overflow-hidden transform rotate-2">
+                
+                {/* Window Controls */}
+                <div className="flex items-center gap-1.5 mb-4 md:mb-6 pb-3 md:pb-4 border-b border-gray-100">
+                    <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-red-400"></div>
+                    <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-yellow-400"></div>
+                    <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-green-400"></div>
+                    <span className="text-[10px] md:text-xs text-gray-400 font-mono ml-4">devsamp_project.js</span>
+                </div>
+
+                {/* Abstract Code/Project Snippets Mosaic */}
+                <div className="grid grid-cols-2 gap-3 md:gap-4 font-mono text-[9px] md:text-[11px] text-gray-600 leading-relaxed">
+                    <div className="space-y-2 md:space-y-3 bg-white p-3 md:p-4 rounded-xl border border-gray-100 shadow-sm col-span-2">
+                        <span className="text-blue-600">const</span> course = <span className="text-emerald-600">&#123;</span><br/>
+                        &nbsp;&nbsp;title: <span className="text-amber-700">'Next.js Agency Masterclass'</span>,<br/>
+                        &nbsp;&nbsp;instructor: <span className="text-amber-700">'Mahadev @ Devsamp'</span>,<br/>
+                        &nbsp;&nbsp;stack: <span className="text-emerald-600">[</span>'Next.js', 'MongoDB'<span className="text-emerald-600">]</span><br/>
+                        <span className="text-emerald-600">&#125;</span>;
+                    </div>
+                    
+                    <div className="space-y-1.5 md:space-y-2 bg-white p-3 md:p-4 rounded-xl border border-gray-100 shadow-sm transform -rotate-2">
+                        <span className="text-purple-600">async function</span> <span className="text-blue-600">db</span>() <span className="text-gray-950">&#123;</span><br/>
+                        &nbsp;&nbsp;<span className="text-purple-600">await</span> connect();<br/>
+                        <span className="text-gray-950">&#125;</span>
+                    </div>
+
+                    <div className="bg-white p-3 md:p-4 rounded-xl border border-gray-100 shadow-sm flex items-center justify-center transform rotate-3">
+                        <div className="flex flex-col items-center">
+                            <span className="text-3xl md:text-4xl font-black text-gray-950">98%</span>
+                            <span className="text-[8px] md:text-[10px] text-gray-500 text-center font-sans mt-1">Completion Rate</span>
+                        </div>
+                    </div>
+
+                    <div className="space-y-2 md:space-y-3 bg-white p-3 md:p-4 rounded-xl border border-gray-100 shadow-sm col-span-2 transform -rotate-1">
+                        &lt;<span className="text-blue-600">HeroSection</span>&gt;<br/>
+                        &nbsp;&nbsp;&lt;<span className="text-blue-600">motion.div</span>&gt;<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-gray-950">&#123;</span>/* Agency UI */<span className="text-gray-950">&#125;</span><br/>
+                        &nbsp;&nbsp;&lt;/<span className="text-blue-600">motion.div</span>&gt;<br/>
+                        &lt;/<span className="text-blue-600">HeroSection</span>&gt;
+                    </div>
+                </div>
+
+                {/* Subtle Overlay Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-50 via-transparent to-transparent pointer-events-none"></div>
+            </div>
+
+            {/* Floating Decorative Elements */}
+            <motion.div 
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-4 -left-4 md:-top-6 md:-left-6 w-12 h-12 md:w-16 md:h-16 bg-blue-100 rounded-xl md:rounded-2xl shadow-lg flex items-center justify-center z-20 border-2 border-white"
+            >
+                <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="JS" className="h-6 md:h-8 w-auto" />
+            </motion.div>
+            
+            <motion.div 
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                className="absolute -bottom-6 right-6 md:-bottom-8 md:right-10 w-14 h-14 md:w-20 md:h-20 bg-indigo-50 rounded-full shadow-lg flex items-center justify-center z-20 border-2 border-white"
+            >
+                <span className="text-xl md:text-3xl font-black text-indigo-600 tracking-tighter">&lt;/&gt;</span>
+            </motion.div>
+
+          </motion.div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
