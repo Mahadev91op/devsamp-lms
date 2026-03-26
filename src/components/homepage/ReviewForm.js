@@ -43,25 +43,24 @@ export default function ReviewForm({ onClose }) {
     }
   };
 
-  const inputStyle = "w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-xs md:text-sm text-white placeholder-gray-600 focus:outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400/50 transition-all duration-300";
+  const inputStyle = "w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5 text-xs md:text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/50 transition-all duration-300";
 
   return (
-    <div className="relative w-full overflow-hidden rounded-3xl">
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-black"></div>
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 bg-yellow-500/20 blur-[50px] rounded-full pointer-events-none"></div>
+    <div className="relative w-full overflow-hidden rounded-3xl bg-white shadow-2xl border border-gray-100">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 bg-blue-100 blur-[50px] rounded-full pointer-events-none"></div>
 
-      <div className="relative border border-white/10 p-5 md:p-6 shadow-2xl">
+      <div className="relative p-5 md:p-6">
         
         <div className="text-center mb-5 md:mb-6">
-          <h3 className="text-lg md:text-xl font-bold text-white tracking-wide">ADD REVIEW</h3>
-          <p className="text-gray-500 text-[10px] md:text-xs mt-1">Share your experience with us.</p>
+          <h3 className="text-lg md:text-xl font-black text-gray-900 tracking-wide">ADD REVIEW</h3>
+          <p className="text-gray-500 text-[10px] md:text-xs mt-1">Share your learning experience.</p>
         </div>
 
         {success ? (
           <motion.div 
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="bg-green-500/10 border border-green-500/50 text-green-400 p-8 rounded-xl text-center py-10"
+            className="bg-green-50 border border-green-200 text-green-600 p-8 rounded-xl text-center py-10"
           >
             <p className="text-2xl mb-2">🎉</p>
             <p className="text-lg font-bold">Review Posted!</p>
@@ -81,11 +80,11 @@ export default function ReviewForm({ onClose }) {
                 />
               </div>
               <div>
-                <label className="text-[9px] md:text-[10px] font-bold text-gray-500 uppercase ml-1 mb-1 block">Class/Role</label>
+                <label className="text-[9px] md:text-[10px] font-bold text-gray-500 uppercase ml-1 mb-1 block">Status/Role</label>
                 <input 
                   type="text" required
                   className={inputStyle}
-                  placeholder="Class 10"
+                  placeholder="Student / Fresher"
                   value={formData.role}
                   onChange={(e) => setFormData({...formData, role: e.target.value})}
                 />
@@ -94,7 +93,7 @@ export default function ReviewForm({ onClose }) {
 
             <div>
               <label className="text-[9px] md:text-[10px] font-bold text-gray-500 uppercase ml-1 mb-1 block">Rating</label>
-              <div className="flex gap-1 bg-white/5 w-full justify-center py-2 rounded-lg border border-white/5">
+              <div className="flex gap-1 bg-gray-50 w-full justify-center py-2 rounded-lg border border-gray-200">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <button
                     key={star} type="button"
@@ -103,7 +102,7 @@ export default function ReviewForm({ onClose }) {
                     onMouseLeave={() => setHoverRating(0)}
                     className="text-xl md:text-2xl transition-transform hover:scale-110 focus:outline-none px-1"
                   >
-                    <span className={star <= (hoverRating || formData.rating) ? "text-yellow-400 drop-shadow-[0_0_5px_rgba(250,204,21,0.8)]" : "text-gray-700"}>★</span>
+                    <span className={star <= (hoverRating || formData.rating) ? "text-yellow-400 drop-shadow-sm" : "text-gray-300"}>★</span>
                   </button>
                 ))}
               </div>
@@ -114,7 +113,7 @@ export default function ReviewForm({ onClose }) {
               <textarea 
                 required rows="3"
                 className={inputStyle}
-                placeholder="Write something..."
+                placeholder="Course kaisa laga?..."
                 value={formData.message}
                 onChange={(e) => setFormData({...formData, message: e.target.value})}
               ></textarea>
@@ -124,7 +123,7 @@ export default function ReviewForm({ onClose }) {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               disabled={loading}
-              className="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-2.5 md:py-3 rounded-lg text-xs md:text-sm uppercase tracking-wider shadow-lg shadow-yellow-500/20 transition-all mt-1"
+              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-2.5 md:py-3 rounded-lg text-xs md:text-sm uppercase tracking-wider shadow-md transition-all mt-1"
             >
               {loading ? "..." : "Submit"}
             </motion.button>

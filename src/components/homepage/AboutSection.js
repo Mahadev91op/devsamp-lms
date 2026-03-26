@@ -2,48 +2,43 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
-// --- UPDATED STAT CARD (Compact & Premium) ---
 const StatCard = ({ number, label, delay }) => (
   <motion.div
     initial={{ opacity: 0, scale: 0.8, rotateX: 10 }}
     whileInView={{ opacity: 1, scale: 1, rotateX: 0 }}
-    whileHover={{ y: -5, scale: 1.05, shadow: "0px 10px 30px rgba(234, 179, 8, 0.2)" }}
+    whileHover={{ y: -5, scale: 1.05, shadow: "0px 10px 30px rgba(59, 130, 246, 0.15)" }}
     viewport={{ once: true }}
     transition={{ type: "spring", stiffness: 200, damping: 20, delay }}
-    className="relative group flex flex-col items-center justify-center p-4 md:p-5 rounded-2xl overflow-hidden cursor-pointer bg-gray-900/40 border border-white/5"
+    className="relative group flex flex-col items-center justify-center p-4 md:p-5 rounded-2xl overflow-hidden cursor-pointer bg-white border border-gray-100 shadow-sm"
   >
-    {/* Card Background & Effects */}
-    <div className="absolute inset-0 bg-gray-900/60 backdrop-blur-xl border border-white/10 rounded-2xl z-0 transition-all duration-500 group-hover:border-yellow-500/50 group-hover:bg-gray-800/80"></div>
-    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] z-0"></div>
-    <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-20 h-20 bg-yellow-500/30 blur-[40px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+    <div className="absolute inset-0 bg-blue-50/50 backdrop-blur-xl border border-blue-100/50 rounded-2xl z-0 transition-all duration-500 group-hover:border-blue-300 group-hover:bg-blue-50"></div>
+    <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-20 h-20 bg-blue-400/20 blur-[40px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
 
-    {/* Content */}
-    <h3 className="relative z-10 text-3xl md:text-4xl font-black text-white mb-1 tracking-tight group-hover:scale-110 transition-transform duration-300 drop-shadow-lg">
-      <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400 group-hover:from-yellow-300 group-hover:to-yellow-500 transition-all duration-300">
+    <h3 className="relative z-10 text-3xl md:text-4xl font-black text-gray-900 mb-1 tracking-tight group-hover:scale-110 transition-transform duration-300">
+      <span className="bg-clip-text text-transparent bg-gradient-to-b from-blue-600 to-indigo-800">
         {number}
       </span>
     </h3>
-    <p className="relative z-10 text-gray-500 text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-bold group-hover:text-white transition-colors">
+    <p className="relative z-10 text-gray-500 text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-bold group-hover:text-blue-700 transition-colors">
       {label}
     </p>
   </motion.div>
 );
 
-// --- VALUE CARD (Compact) ---
 const ValueCard = ({ icon, title, desc, delay }) => (
   <motion.div
     initial={{ opacity: 0, x: -20 }}
     whileInView={{ opacity: 1, x: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.5, delay }}
-    className="flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5"
+    className="flex items-start gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-200"
   >
-    <div className="w-10 h-10 rounded-full bg-yellow-500/10 flex items-center justify-center text-yellow-400 border border-yellow-500/20 flex-shrink-0 shadow-[0_0_15px_-5px_rgba(234,179,8,0.3)]">
+    <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 border border-blue-200 flex-shrink-0">
       {icon}
     </div>
     <div>
-      <h4 className="text-white font-bold text-base mb-0.5">{title}</h4>
-      <p className="text-gray-400 text-xs md:text-sm leading-relaxed">{desc}</p>
+      <h4 className="text-gray-900 font-bold text-base mb-0.5">{title}</h4>
+      <p className="text-gray-600 text-xs md:text-sm leading-relaxed">{desc}</p>
     </div>
   </motion.div>
 );
@@ -52,17 +47,12 @@ export default function AboutSection() {
   const ref = useRef(null);
 
   return (
-    // Updated Padding: Reduced py-32 to py-16/20 to fit in frame
-    <section className="relative py-12 md:py-20 bg-[#050505] overflow-hidden flex items-center justify-center min-h-[90vh] md:min-h-[80vh]" id="about">
+    <section className="relative py-12 md:py-20 bg-gray-50 overflow-hidden flex items-center justify-center min-h-[90vh] md:min-h-[80vh]" id="about">
       
-      {/* Background Effects (Same as before) */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-      <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-indigo-900/10 blur-[120px] rounded-full pointer-events-none mix-blend-screen"></div>
-      <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-yellow-900/10 blur-[100px] rounded-full pointer-events-none mix-blend-screen"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+      <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-indigo-200/40 blur-[120px] rounded-full pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
-        
-        {/* Grid Gap Reduced */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
           
           {/* LEFT SIDE: Content */}
@@ -71,11 +61,11 @@ export default function AboutSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-block px-3 py-1 border border-yellow-500/30 rounded-full bg-yellow-500/10 backdrop-blur-md"
+              className="inline-block px-3 py-1 border border-blue-200 rounded-full bg-white backdrop-blur-md shadow-sm"
             >
-              <span className="text-[10px] md:text-xs font-bold text-yellow-400 uppercase tracking-widest flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse"></span>
-                About LearnR
+              <span className="text-[10px] md:text-xs font-bold text-blue-600 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse"></span>
+                About Devsamp
               </span>
             </motion.div>
 
@@ -84,11 +74,9 @@ export default function AboutSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              // Text size slightly reduced to fit better
-              className="text-3xl md:text-5xl font-black text-white leading-tight"
+              className="text-3xl md:text-5xl font-black text-gray-900 leading-tight"
             >
-              Revolutionizing <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-500 to-amber-600 drop-shadow-sm">English Learning</span>
+              Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Mahadev</span>
             </motion.h2>
 
             <motion.p 
@@ -96,55 +84,51 @@ export default function AboutSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="text-gray-400 text-sm md:text-base leading-relaxed border-l-4 border-yellow-500/50 pl-4 bg-gradient-to-r from-white/5 to-transparent py-2 rounded-r-lg"
+              className="text-gray-600 text-sm md:text-base leading-relaxed border-l-4 border-blue-500 pl-4 bg-gradient-to-r from-blue-50 to-transparent py-2 rounded-r-lg font-medium"
             >
-              We blend AI technology with proven methods to create a fast, fun, and effective learning experience.
+              Mera naam Mahadev hai. Main ek Full-Stack Next.js, MongoDB aur JavaScript Developer hoon. Apni agency "Devsamp" ke through main apne industry experience ko directly aap tak is course me la raha hoon.
             </motion.p>
 
             <div className="space-y-3 pt-2">
               <ValueCard 
                 delay={0.3}
-                icon={<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>}
-                title="Fast & Effective"
-                desc="AI-driven algorithms adapt to your speed, ensuring you master concepts faster."
+                icon={<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>}
+                title="Practical Coding"
+                desc="Sirf theory nahi, hum real-world projects aur production-ready apps banana sikhenge."
               />
               <ValueCard 
                  delay={0.4}
-                 icon={<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>}
-                 title="Community Driven"
-                 desc="Join thousands of learners in a supportive environment to practice and grow."
+                 icon={<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>}
+                 title="Fast & Modern Stack"
+                 desc="Next.js aur MongoDB ke sath modern web standards ko master karein."
               />
             </div>
           </div>
 
           {/* RIGHT SIDE: Visuals & Stats */}
           <div className="relative">
-            {/* Background for Cards Area */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-gray-800/20 to-transparent rounded-[2.5rem] border border-white/5 opacity-50 rotate-3 scale-105 pointer-events-none"></div>
-            
-            {/* 4 Cards Grid - Compact Gap */}
             <div className="grid grid-cols-2 gap-3 md:gap-4 relative z-10">
-              <StatCard number="50K+" label="Active Learners" delay={0.2} />
-              <StatCard number="120+" label="Expert Courses" delay={0.3} />
-              <StatCard number="4.9" label="App Rating" delay={0.4} />
-              <StatCard number="24/7" label="AI Support" delay={0.5} />
+              <StatCard number="100+" label="Projects Built" delay={0.2} />
+              <StatCard number="MERN" label="Tech Stack" delay={0.3} />
+              <StatCard number="24/7" label="Community Support" delay={0.4} />
+              <StatCard number="100%" label="Practical Learning" delay={0.5} />
             </div>
 
-            {/* Quote Box - Compact */}
+            {/* Quote Box */}
             <motion.div 
                initial={{ opacity: 0, scale: 0.9, y: 20 }}
                whileInView={{ opacity: 1, scale: 1, y: 0 }}
                viewport={{ once: true }}
                transition={{ delay: 0.6 }}
-               className="mt-6 p-5 bg-gradient-to-r from-gray-900 to-black border border-yellow-500/20 rounded-2xl relative overflow-hidden shadow-xl"
+               className="mt-6 p-5 bg-white border border-gray-200 rounded-2xl relative overflow-hidden shadow-lg"
             >
-               <div className="absolute -right-4 -top-4 w-20 h-20 bg-yellow-500/10 rounded-full blur-xl"></div>
-               <p className="text-sm md:text-base font-serif italic text-gray-300 relative z-10 leading-relaxed">
-                 "Education is the most powerful weapon which you can use to change the world."
+               <div className="absolute -right-4 -top-4 w-20 h-20 bg-blue-100 rounded-full blur-xl"></div>
+               <p className="text-sm md:text-base font-medium italic text-gray-700 relative z-10 leading-relaxed">
+                 "Code is like humor. When you have to explain it, it’s bad. Let's write code that builds the future."
                </p>
-               <div className="flex items-center gap-3 mt-3 border-t border-white/10 pt-3">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center font-bold text-black text-xs shadow-lg">N</div>
-                  <span className="text-xs font-bold text-white tracking-wide">Nelson Mandela</span>
+               <div className="flex items-center gap-3 mt-3 border-t border-gray-100 pt-3">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center font-bold text-white text-xs shadow-md">M</div>
+                  <span className="text-xs font-bold text-gray-900 tracking-wide">Mahadev, Devsamp</span>
                </div>
             </motion.div>
           </div>

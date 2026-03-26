@@ -9,7 +9,6 @@ export default function ToggleReviewSection() {
   return (
     <div className="mt-20 w-full flex flex-col items-center justify-center relative z-20">
       
-      {/* The Button (Only visible when form is closed) */}
       <AnimatePresence>
         {!isOpen && (
           <motion.div
@@ -20,12 +19,11 @@ export default function ToggleReviewSection() {
           >
             <button
               onClick={() => setIsOpen(true)}
-              className="group relative px-8 py-4 bg-black border border-yellow-500/30 rounded-full overflow-hidden hover:border-yellow-400 transition-colors duration-300"
+              className="group relative px-8 py-4 bg-white border border-gray-300 rounded-full overflow-hidden hover:border-blue-500 transition-colors duration-300 shadow-sm"
             >
-              {/* Button Glow Effect */}
-              <div className="absolute inset-0 bg-yellow-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
+              <div className="absolute inset-0 bg-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               
-              <span className="relative z-10 flex items-center gap-3 text-white font-bold tracking-wider uppercase text-sm group-hover:text-yellow-400 transition-colors">
+              <span className="relative z-10 flex items-center gap-3 text-gray-800 font-bold tracking-wider uppercase text-sm group-hover:text-blue-600 transition-colors">
                 <span className="text-xl">✍️</span> Write a Review
               </span>
             </button>
@@ -33,7 +31,6 @@ export default function ToggleReviewSection() {
         )}
       </AnimatePresence>
 
-      {/* The Form (Slides down smoothly) */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -41,7 +38,7 @@ export default function ToggleReviewSection() {
             animate={{ opacity: 1, height: "auto", scale: 1 }}
             exit={{ opacity: 0, height: 0, scale: 0.95 }}
             transition={{ duration: 0.5, type: "spring", bounce: 0.3 }}
-            className="w-full overflow-hidden"
+            className="w-full max-w-md mx-auto overflow-hidden"
           >
             <div className="py-10 px-4">
               <ReviewForm onClose={() => setIsOpen(false)} />
